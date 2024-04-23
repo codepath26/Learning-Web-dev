@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copy to Clipboard Example</title>
+  </head>
+  <style>
+    #main {
+      border: 1px solid black;
+    }
+    #block {
+      background-color: red;
+      width: 100px;
+      height: 100px;
+    }
+    #inline {
+      background-color: purple;
+      color: white;
+
+      margin: 100px 100px;
+    }
+    #box1 {
+      background-color: orange;
+      margin-left: 400px;
+      width: 100px;
+      height: 100vh;
+      margin-top: 10px;
+      position: fixed;
+      bottom: 0;
+    }
+    #box2 {
+      background-color: orange;
+      width: 100px;
+      height: 100vh;
+      margin-top: 10px;
+      position: sticky;
+      top: 0;
+    }
+    #box3 {
+      background-color: red;
+      width: 1000px;
+      height: 100vh;
+      margin-top: 10px;
+    }
+    #box4 {
+      background-color: orange;
+      width: 100px;
+      height: 100vh;
+      margin-top: 10px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  </style>
+  <body>
+    <div id="main">
+      <span id="inline">Inline Element</span>
+      <div id="block">Block Level Element</div>
+    </div>
+    <div id="box1">1</div>
+    <div id="box2">2</div>
+    <div id="box3">3</div>
+    <div id="box4">4</div>
+  </body>
+</html>

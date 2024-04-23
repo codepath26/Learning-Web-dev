@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <button class="btn">Increment</button>
+    <!-- <p>button press<span class="increment_press"> 0 </span>times</p>
+    <p>triggered <span class="increment_count"> 0 </span>times</p>
+    <p>triggered Triggeres<span class="increment_Throtels"> 0 </span>times</p> -->
+
+    <br /><br />
+    <h1>Own IMplementation</h1>
+    <p>button press<span class="own_btnPress"> 0 </span>times</p>
+    <p>triggered <span class="own_debouncing"> 0 </span>times</p>
+    <p>triggered Triggeres<span class="own_throttle"> 0 </span>times</p>
+
+    <script>
+      const btn = document.querySelector(".btn");
+      const btnpress = document.querySelector(".increment_press");
+      const count = document.querySelector(".increment_count");
+
+      // own
+      const throttlebtn = document.querySelector(".increment_Throtels");
+      const own_btnPress = document.querySelector(".own_btnPress");
+      const own_debouncing = document.querySelector(".own_debouncing");
+      const own_throttle = document.querySelector(".own_throttle");
+
+      let pressCount = 0;
+      let triggeredCount = 0;
+      let throttleCount = 0;
+
+      let btnCount = 0;
+      let debounceCount = 0;
+      let throttleownCount = 0;
+
+      // using the Lodash laibrary
+      const myDebounce = _.debounce(() => {
+        count.innerHTML = ++triggeredCount;
+      }, 800);
+      const myThrottle = _.throttle(() => {
+        throttlebtn.innerHTML = ++throttleCount;
+      }, 3000);
+
+      // own Implimentation of the debounce and throttling.
+      const myOwnDebounce = (cb, d) => {
+        let timer;
+        return function (...args) {
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => {
+            cb(...args);
+          }, d);
+        };
+      };
+
+      const owndebounceCount = myOwnDebounce(() => {
+        own_debouncing.innerHTML = ++debounceCount;
+      }, 800);
+
+      const myOwnThrottle = (cb, d) => {
+        let lastTime;
+
+        return function (...args) {
+          let now = new Date().getTime();
+          if (now - lastTime < d) return;
+          lastTime = now;
+          return cb(...args);
+        };
+      };
+
+      const own_throttleCount = myOwnThrottle(() => {
+        own_throttle.innerHTML = ++throttleCount;
+      }, 1000);
+
+      // eventLisner to button
+      btn.addEventListener("click", () => {
+        // btnpress.innerHTML = ++pressCount;
+        own_btnPress.innerHTML = ++btnCount;
+        // myDebounce();
+        // myThrottle();
+        // owndebounceCount(debounceCount);
+        own_throttleCount();
+      });
+    </script>
+  </body>
+</html>

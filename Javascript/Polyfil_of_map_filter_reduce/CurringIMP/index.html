@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="heading">parth thakor</h1>
+    <script>
+      function UpdateTextContent(id) {
+        return function (content) {
+          console.log("this is the chatn02");
+          document.querySelector(`#${id}`).textContent = content;
+        };
+      }
+      const updateHeading = UpdateTextContent("heading");
+      setTimeout(() => {
+        console.log("this is the chatn");
+        updateHeading("this is the headering for  the fist time");
+      }, 3000);
+    </script>
+  </body>
+</html>

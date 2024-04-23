@@ -1,0 +1,53 @@
+<!-- we can also use the LOdash Laibrary  to impliment debouncing -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button class="btn">Increment the Count</button>
+      <p>btnpress <span class="btnCount">0</span> times</p>
+      <p>apicalls <span class="apiCount">0</span> times</p>
+    </div>
+    <script>
+      const btnCount = document.querySelector(".btnCount");
+      const apiCallsCount = document.querySelector(".apiCount");
+      const btn = document.querySelector(".btn");
+
+      // countVariable
+      let countOfBtn = 0;
+      let countOfApi = 0;
+
+      //  countHandler
+
+      const countHandler = (...args) => {
+        console.log(args);
+        apiCallsCount.innerHTML = ++countOfApi;
+      };
+
+      // My Debouncing Function
+
+      const myDebouncing = (cb, d) => {
+        let timer;
+        return function (...args) {
+          if (timer) clearTimeout(timer);
+         timer =  setTimeout(() => {
+            cb(...args);
+          }, d);
+        };
+      };
+
+      const debouncedFunc = myDebouncing(countHandler, 800);
+
+      // add eventListner to button
+      btn.addEventListener("click", () => {
+        btnCount.innerHTML = ++countOfBtn;
+        debouncedFunc(2);
+      });
+    </script>
+  </body>
+</html>
